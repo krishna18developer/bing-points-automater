@@ -1,0 +1,10 @@
+# Edge WebDriver
+msedgedriver
+msedgedriver.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+venv/
