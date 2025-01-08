@@ -25,9 +25,11 @@ def get_edge_profile_path():
     if system == "Darwin":  # macOS
         return f"/Users/{username}/Library/Application Support/Microsoft Edge/Default"
     elif system == "Windows":
-        return f"C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default"
+        # Return the parent User Data directory instead of Default profile
+        return f"C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data"
     else:
         raise OSError(f"Unsupported operating system: {system}")
+    
 
 def generate_random_search():
     # Generate a random string of 5-10 characters
@@ -40,14 +42,32 @@ def main():
     
     try:
         profile_path = get_edge_profile_path()
-        edge_options.add_argument(f"user-data-dir={profile_path}")
+        
+        # Add these options for Windows to properly handle profiles
+        if platform.system() == "Windows":
+            # Basic options for stability on Windows
+            edge_options.add_argument("--disable-dev-shm-usage")
+            edge_options.add_argument("--no-sandbox")
+            edge_options.add_argument("--disable-gpu")
+            edge_options.add_argument("--remote-debugging-port=9222")
+            
+            edge_options.add_argument(f"user-data-dir={profile_path}")
+            edge_options.add_argument("profile-directory=Default")  # Use Default profile
+            edge_options.add_argument("--no-first-run")
+            edge_options.add_argument("--no-default-browser-check")
+            edge_options.add_argument("--disable-extensions")
+            edge_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        else:
+            edge_options.add_argument(f"user-data-dir={profile_path}")
         
         # Set up the Edge service with local driver
         driver_name = "msedgedriver.exe" if platform.system() == "Windows" else "msedgedriver"
         edge_service = Service(executable_path=f"./{driver_name}")
         
+        print("Initializing Edge browser...")
         # Initialize the browser with the local driver
         driver = webdriver.Edge(service=edge_service, options=edge_options)
+        print("Edge browser initialized successfully!")
         
         sleep_input = input("Enter the sleep duration between searches in seconds (default 30): ")
         sleep_duration = 30 if sleep_input == "" else int(sleep_input)
