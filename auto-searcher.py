@@ -1,3 +1,12 @@
+"""
+Bing Points Automater
+Author: Krishna Teja
+GitHub: https://github.com/krishna18developer
+
+A script to automate Bing searches for Microsoft Rewards points.
+Works on both Windows and macOS with existing Edge profiles.
+"""
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys

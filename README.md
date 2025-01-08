@@ -1,36 +1,32 @@
-# Auto Bing Searcher
+# Bing Points Automater
 
-A Python script that automates Bing searches using Selenium WebDriver to help earn Microsoft Rewards points.
+An automation script that performs Bing searches to help accumulate Microsoft Rewards points.
 
-## Prerequisites
+## Features
+- Works on both Windows and macOS
+- Uses existing Microsoft Edge profile
+- Configurable delay between searches
+- Random search term generation
+- Automatic profile path detection
 
+## Requirements
 - Python 3.x
-- Microsoft Edge browser installed
-- Microsoft Edge WebDriver (msedgedriver)
-- Selenium package
+- Selenium
+- Microsoft Edge browser
+- Microsoft Edge WebDriver (place in project directory)
 
-## Setup Instructions
+## Usage
+1. Setup a virtual environment: `python3 -m venv venv`
+2. Activate the virtual environment: `source venv/bin/activate`
+3. Install requirements: `pip install -r requirements.txt`
+4. Place appropriate Edge WebDriver in project directory:
+   - Windows: `msedgedriver.exe`
+   - macOS: `msedgedriver`
+5. Run the script: `python auto-searcher.py`
 
-1. Setup a virtual environment
+## Author
+Created by Krishna Teja Mekala
 
-```bash
-python3 -m venv venv
-```
+GitHub: https://github.com/krishna18developer
 
-2. Activate the virtual environment
-
-```bash
-source venv/bin/activate
-```
-
-3. Install the required packages
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Run the script
-
-```bash
-python auto-searcher.py
-```
+LinkedIn: https://www.linkedin.com/in/krishna18developer
